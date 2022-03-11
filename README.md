@@ -1,6 +1,6 @@
 # React 开发思想纲领
 
-> Chinese translation of the [react-philosophies](https://github.com/mithi/react-philosophies)
+> Chinese translation of the [react-philosophies](https://github.com/mithi/react-philosophies) [![Commit snapshot](https://img.shields.io/badge/v1.0.1-(d1984fd)-orange.svg?color=purple)](https://github.com/mithi/react-philosophies/blob/d1984fd0d01c19ae2970944cb77ddfad9980c7bc/README.md)
 
 ## 目录
 
