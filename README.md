@@ -1,6 +1,6 @@
 # React 开发思想纲领
 
-> Chinese translation of the [react-philosophies](https://github.com/mithi/react-philosophies) [![Commit snapshot](https://img.shields.io/badge/v1.0.1-(d1984fd)-orange.svg?color=purple)](https://github.com/mithi/react-philosophies/blob/d1984fd0d01c19ae2970944cb77ddfad9980c7bc/README.md)
+> Chinese translation of the [react-philosophies](https://github.com/mithi/react-philosophies) [![Commit snapshot](<https://img.shields.io/badge/v1.0.1-(d1984fd)-orange.svg?color=purple>)](https://github.com/mithi/react-philosophies/blob/d1984fd0d01c19ae2970944cb77ddfad9980c7bc/README.md)
 
 ## 目录
 
@@ -12,25 +12,25 @@
 
 ## 🧘 0. 介绍
 
-`React 开发思想纲领` 是：
+`《React 开发思想纲领》`是：
 
 - 我开发 `React` 时的一些思考
-- 每当我 review 他人或自己的代码时，脑中就会浮现的想法
-- 仅仅作为参考和建议，而不是严格的要求
-- 会随着我经验增长而不断更新
-- 大多数技术点是基础的[重构方法论](https://en.wikipedia.org/wiki/Code_refactoring)，[SOLID 原则](https://en.wikipedia.org/wiki/SOLID)以及[极限编程](https://en.wikipedia.org/wiki/Extreme_programming)思想等的变体，仅仅是应用到了 `React` 而已 🙂
+- 每当我 review 他人或自己的代码时自然而然会思考的东西
+- **仅仅作为参考和建议**，并非严格的要求
+- 会随着我的经验不断更新
+- 大多数技术点是基础的[重构方法论](https://en.wikipedia.org/wiki/Code_refactoring)，[SOLID 原则](https://en.wikipedia.org/wiki/SOLID)以及[极限编程](https://en.wikipedia.org/wiki/Extreme_programming)等思想的变体，仅仅是在 `React` 中的实践而已 🙂
 
-你可能会觉得我讲的这些非常基础，好比常识。但是，我曾经维护过的一些复杂大型项目的代码中，都缺少这些常识。这篇文档里提供的示例都来自于线上代码。
+你可能会觉得我写的这些非常基础。但以下示例都来自一些复杂大型项目的线上代码。
 
-`React 开发思想纲领`的灵感来源于我实际开发中遇到的不同场景。
+`《React 开发思想纲领》`的灵感来源于我实际开发中遇到的各种场景。
 
 ## 🧘 1. 最低要求
 
 ### 1.1 计算机比你更「智能」
 
-1. 使用 [`ESLint`](https://eslint.org/) 来静态分析你的代码. 开启 [`rule-of-hooks`](https://www.npmjs.com/package/eslint-plugin-react-hooks) 和 `exhaustive-deps` 这两个规则来捕获 `React` 错误
+1. 使用 [`ESLint`](https://eslint.org/) 来静态分析你的代码，开启 [`rule-of-hooks`](https://www.npmjs.com/package/eslint-plugin-react-hooks) 和 `exhaustive-deps` 这两个规则来捕获 `React` 错误。
 2. 开启 JS [严格模式](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode) 吧，都 2202 年了。
-3. [直面依赖](https://overreacted.io/a-complete-guide-to-useeffect/#two-ways-to-be-honest-about-dependencies)，解决在`useMemo`, `useCallback` 和 `useEffect` 上 `exhaustive-deps` 规则提示的 warning 或 error 问题。 可以[将最新的值挂在 ref 上](https://epicreact.dev/the-latest-ref-pattern-in-react)来保证这些 hook 的回调中不取到旧值，同时避免不必要的重新渲染。
+3. [直面依赖](https://overreacted.io/a-complete-guide-to-useeffect/#two-ways-to-be-honest-about-dependencies)，解决在`useMemo`，`useCallback` 和 `useEffect` 上 `exhaustive-deps` 规则提示的 warning 或 error 问题。 可以[将最新的值挂在 ref 上](https://epicreact.dev/the-latest-ref-pattern-in-react)来保证这些 hook 在回调中拿到的都是最新的值，同时避免不必要的重新渲染。
 4. 使用 map 批量渲染组件时，[都加上 key](https://epicreact.dev/why-react-needs-a-key-prop)。
 5. [只在最顶层使用 hook](https://reactjs.org/docs/hooks-rules.html)，不要在循环、条件或嵌套语句中使用 hook。
 6. 理解"不能对已经卸载的组件执行状态更新”的控制台警告。[facebook/react/pull/22114](https://github.com/facebook/react/pull/22114)
@@ -39,45 +39,43 @@
 9. 记得要 [`tree-shaking`](https://webpack.js.org/guides/tree-shaking/)!
 10. 使用 [Prettier](https://prettier.io/) 来保证代码的格式化一致性！
 11. 使用 [`Typescript`](https://www.typescriptlang.org/) 和 [`NextJS`](https://nextjs.org/) 这样的框架来提升开发体验。
-12. 强烈推荐 [Code Climate](https://codeclimate.com/quality/)（或其他类似的）开源库。这类工具会自动检测代码异味（Code Smell，代码中的任何可能导致深层次问题的症状），能促使我去减少项目里的技术债务。
+12. 强烈推荐 [Code Climate](https://codeclimate.com/quality/)（或其他类似的）开源库。这类工具会自动检测代码异味（Code Smell，代码中的任何可能导致深层次问题的症状），它可以促使我去处理项目里留下的技术债。
 
 ### 1.2 Code is just a necessary evil（代码只是一种必要的邪恶）
 
-> 程序员的目标是解决客户的问题，代码只是副产品。
+_译者注：程序员的目标是解决客户的问题，代码只是副产品_
 
-> "The best code is no code at all. Every new line of code you willingly bring into the world is code that has to be debugged, code that has to be read and understood, code that has to be supported." - Jeff Atwood
+> "The best code is no code at all. Every new line of code you willingly bring into the world is code that has to be debugged, code that has to be read and understood, code that has to be supported." - Jeff Atwood <br>
+> "最好的代码就是无代码。每一行新的代码都需要被调试，需要被阅读和理解，与支持。"
 
-> 最好的代码就是无代码。每一行新的代码都需要被调试，需要被阅读和理解，与支持。
-
-> "One of my most productive days was throwing away 1000 lines of code." - Eric S. Raymond
-
+> "One of my most productive days was throwing away 1000 lines of code." - Eric S. Raymond <br>
 > "我最有效率的一天就是扔掉 1000 行代码"
 
 参考：[Write Less Code（少写代码）- Rich Harris](https://svelte.dev/blog/write-less-code), [Code is evil（代码是邪恶的）- Artem Sapegin](https://github.com/sapegin/washingcode-book/blob/master/manuscript/Code_is_evil.md)
 
 #### 1.2.1 先思考，再加依赖
 
-依赖加的越多，提供给浏览器的代码就越多。扪心问问自己，你是否真的使用了某个特定库的特性？
+依赖加的越多，提供给浏览器的代码就越多。扪心问问自己，你是否真的使用了某个库的 feature？
 
 <details>
-    <summary><strong><em>🙈  你真的需要它吗?</strong> 看看这些你可能不需要的依赖/代码示例</em></summary>
+    <summary><strong><em>🙈  你真的需要它吗?</strong> 看看这些你可能不需要的依赖</em></summary>
 
 <br/>
 
-1. 你是否真的需要 [`Redux`](https://redux.js.org/)？ 有可能需要，但其实 React 本身也是一个[状态管理库](https://kentcdodds.com/blog/application-state-management-with-react).
+1. 你是否真的需要 [`Redux`](https://redux.js.org/)？有可能需要，但其实 React 本身也是一个[状态管理库](https://kentcdodds.com/blog/application-state-management-with-react)。
 
-2. 你是否真的需要 [`Apollo client`](https://www.apollographql.com/docs/react/) ？ Apollo client 有许多很强大的功能, 比如数据规范化。使用的同时也会显著提高包体积。如果你的项目使用的并非 Apollo client 特有的 feature，可以考虑使用一些轻量的库来替代，比如 [`react-query`](https://react-query.tanstack.com/comparison) 或 [`SWR`](https://github.com/vercel/swr) (或者根本不用)。
+2. 你是否真的需要 [`Apollo client`](https://www.apollographql.com/docs/react/)？`Apollo client` 有许多很强大的功能，比如数据规范化。但使用的同时也会显著提高包体积。如果你的项目使用的并非是 `Apollo client` 特有的 feature，可以考虑使用一些轻量的库来替代，比如 [`react-query`](https://react-query.tanstack.com/comparison) 或 [`SWR`](https://github.com/vercel/swr) (或者根本不用)。
 
-3. [`Axios`](https://github.com/axios/axios)呢？Axios 是一个很棒的库，它的一些特性不容易通过原生的 `fetch` API 来复刻。但是如果使用 `Axios` 只是因为它有更好的 API，完全可以考虑在 `fetch` 上做一层封装（比如 [`redaxios`](https://github.com/developit/redaxios) 或自己实现)。取决于你的 App 是否真正地使用了 `Axios` 的核心特性。
+3. [`Axios`](https://github.com/axios/axios)呢？Axios 是一个很棒的库，它的一些特性不容易通过原生的 `fetch` API 来复刻。但是如果使用 `Axios` 只是因为它有更好的 API，完全可以考虑在 `fetch` 上做一层封装（比如 [`redaxios`](https://github.com/developit/redaxios) 或自己实现)。取决于你的 App 是否真正地使用了 `Axios` 的核心 feature。
 
 4. [`Decimal.js`](https://github.com/MikeMcl/decimal.js/)呢？或许 [Big.js](https://github.com/MikeMcl/big.js/) 或者[其他轻量的库](https://www.npmtrends.com/big.js-vs-bignumber.js-vs-decimal.js-vs-mathjs)就足够了。
 
-5. [`Lodash`](https://lodash.com/)/[`underscoreJS`](https://underscorejs.org/)呢？推荐看看[【你不需要系列之“你不需要 Lodash/Underscore”】](https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore)
+5. [`Lodash`](https://lodash.com/)/[`underscoreJS`](https://underscorejs.org/)呢？推荐你看看[【你不需要系列之“你不需要 Lodash/Underscore”】](https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore)
    。
 
 6. [`MomentJS`](https://momentjs.com/)呢？[【你不需要系列之“你不需要 Momentjs”】](https://github.com/you-dont-need/You-Dont-Need-Momentjs)
 
-7. 你不需要为了主题（`浅色`/`深色`模式）而使用 `Context`，考虑下用[`css 变量`](https://epicreact.dev/css-variables) 代替？
+7. 你不需要为了主题（`浅色`/`深色`模式）而使用 `Context`，考虑下用[`css 变量`](https://epicreact.dev/css-variables) 代替。
 
 8. 你甚至不需要 `Javascript`，CSS 也足够强大。[【你不需要系列之“你不需要 JavaScript”】](https://github.com/you-dont-need/You-Dont-Need-JavaScript)
    <br/>
@@ -86,8 +84,7 @@
 
 #### 1.2.2 不要自作聪明，提前设计
 
-> "What could happen with my software in the future? Oh yeah, maybe this and that. Let’s implement all these things since we are working on this part anyway. That way it’s future-proof."
-
+> "What could happen with my software in the future? Oh yeah, maybe this and that. Let’s implement all these things since we are working on this part anyway. That way it’s future-proof." <br>
 > "我们的软件在未来会如何迭代？可能会这样或者那样，如果在当下就开始往这些方向进行代码设计，这就叫 future-proof（防过时，面向未來编程）。"
 
 **不要这样搞！** 应该在面临需求的时候再去实现相应功能，而不是在你预见到可能需要的时候。代码应该越少越好！([Martin Fowler: YAGNI](https://martinfowler.com/bliki/Yagni.html), [C2 Wiki: You Arent Gonna Need It!](https://wiki.c2.com/?YouArentGonnaNeedIt))
@@ -98,7 +95,7 @@
 
 **1.3.1 检测代码异味（Code Smell），并在必要时对其进行处理。**
 
-当你意识到某个地方出现了问题，那就立即改正。但是，如果当前修复不是那么容易，或者当时你没有时间，那请至少添加一条注释（`FIXME` 或者 `TODO`），附上对该问题的简要描述。来确保每个人都知道这里有问题，也向他们表明，当他们遇到这样的情况时也该这样做。
+当你意识到某个地方出现了问题，那就马上处理掉。但如果当前不容易修复，或者没有时间，那请至少添加一条注释（`FIXME` 或者 `TODO`），附上对该问题的简要描述。来让项目里的每个人都知道这里有问题，让他们意识到当他们遇到这样的情况时也该这样做。
 
 <details>
     <summary><strong>🙈 来看看这些容易发现的代码异味</strong></summary>
@@ -117,12 +114,11 @@
 
 </details>
 
-切记，代码异味并不一定意味着代码需要修改，它只是告诉你，你可能能够想出更好的方式来实现相同的功能。
+切记，代码异味并不一定意味着代码需要修改，它只是告诉你，你应该可以想出更好的方式来实现相同的功能。
 
 **1.3.2 无情的重构。简单比复杂好。**
 
-> Is the CL more complex than it should be? Check this at every level of the CL—are individual lines too complex? Are functions too complex? Are classes too complex? “Too complex” usually means “can’t be understood quickly by code readers.” It can also mean “developers are likely to introduce bugs when they try to call or modify this code.”- Google Engineering Practices: What to look for in a code review
-
+> Is the CL more complex than it should be? Check this at every level of the CL—are individual lines too complex? Are functions too complex? Are classes too complex? “Too complex” usually means “can’t be understood quickly by code readers.” It can also mean “developers are likely to introduce bugs when they try to call or modify this code.”- Google Engineering Practices: What to look for in a code review <br>
 > 当 reviewer 在 Code Review（CR）代码时，ChangeList（CL）是否比想象中更复杂？某些行是否太复杂？函数是否太复杂？类是否太复杂？“太复杂”意味着“代码的读者不能快速理解”，也意味着“当别人试图变更此处时，容易产生 bug” —— [谷歌工程实践：CR 时应该做什么](https://google.github.io/eng-practices/review/reviewer/looking-for.html)
 
 **💁‍♀️ 小技巧: 简化[复杂的条件语句](https://github.com/sapegin/washingcode-book/blob/master/manuscript/Avoid_conditions.md)，最好能提前 return。**
@@ -168,7 +164,7 @@ throw new Error('This should be impossible')
 
 ### 1.4 你可以做的更好
 
-**💁‍♀️ 小技巧: 可以在 “setState” 时传入回调函数，所以没必要把 “state” 作为一个依赖项**
+**💁‍♀️ 小技巧: 可以在 `setState` 时传入回调函数，所以没必要把 `state` 作为一个依赖项**
 
 你不用把 `setState` 和 `dispatch` 放在 `useEffect` 和 `useCallback` 这些 hook 的依赖数组中。ESLint 也不会给你提示，因为 React 已经确保了它们不会出错。
 
@@ -259,22 +255,20 @@ function App() {
 
 **💁‍♀️ 小技巧: 在写组件之前，先思考该怎么用它**
 
-[设计 API 很难](http://sweng.the-davies.net/Home/rustys-api-design-manifesto)，[`README 驱动开发 （RDD）`](https://tom.preston-werner.com/2010/08/23/readme-driven-development.html) 是个很有用的办法，可以帮助你设计出更好的 API。并不是说应该无脑使用 [RDD](https://rathes.me/blog/en/readme-driven-development/)，但它背后的思想是很值得学习的。我自己发现，在设计实现组件 API 之前，使用 RDD 通常比不用时设计地更好。
+[设计 API 很难](http://sweng.the-davies.net/Home/rustys-api-design-manifesto)，[`README 驱动开发（RDD）`](https://tom.preston-werner.com/2010/08/23/readme-driven-development.html) 是个很有用的办法，可以帮助你设计出更好的 API。并不是说应该无脑使用 [RDD](https://rathes.me/blog/en/readme-driven-development/)，但它背后的思想是很值得学习的。我自己发现，在设计实现组件 API 之前，使用 RDD 通常比不用时设计地更好。
 
 ## 🧘 2. 面向幸福设计
 
-> "Any fool can write code that a computer can understand. Good programmers write code that humans can understand." - Martin Fowler
-
+> "Any fool can write code that a computer can understand. Good programmers write code that humans can understand." - Martin Fowler <br>
 > "任何傻瓜都能写出计算机能够理解的代码。优秀的程序员写出人能够理解的代码"
 
-> "The ratio of time spent reading versus writing is well over 10 to 1. We are constantly reading old code as part of the effort to write new code. So if you want to go fast, if you want to get done quickly, if you want your code to be easy to write, make it easy to read." ― Robert C. Martin (Not saying I agree with his political views)
-
+> "The ratio of time spent reading versus writing is well over 10 to 1. We are constantly reading old code as part of the effort to write new code. So if you want to go fast, if you want to get done quickly, if you want your code to be easy to write, make it easy to read." ― Robert C. Martin (Not saying I agree with his political views) <br>
 > "花在阅读和写作上的时间比例远远超过 10: 1。作为编写新代码工作的一部分，我们不断地阅读旧代码。因此如果你想快速完成开发，让代码可维护性强，那就提高它的可读性。"
 
-**太长(若)不看(请看这里)**
+**太长不看版**
 
 1. 💖 通过删除冗余的状态来减少状态管理的复杂性。
-2. 💖 “传递香蕉，而不是拿着香蕉的大猩猩和整个丛林“（意思是尽量将基本类型作为 props 传递）。
+2. 💖 “传递香蕉，而不是拿着香蕉的大猩猩和整个丛林“（意思是尽量传组件要的值，而不是传一个大集合，让组件内部去大集合上面取）。
 3. 💖 让你的组件小而简单 —— 单一职责原则。
 4. 💖 复制比错误的抽象要“便宜”的多（避免提早/不恰当的设计）。
 5. 避免 prop 层层传递（又叫 prop 钻取，prop drilling）([Michael Jackson](https://www.youtube.com/watch?v=3XaXKiXtNjw))。`Context` 不是解决状态共享问题的银弹。
@@ -497,8 +491,7 @@ const Points = () => {
 
 ### 💖 2.2 “传递香蕉，而不是拿着香蕉的大猩猩和整个丛林“
 
-> You wanted a banana but what you got was a gorilla holding the banana and the entire jungle. - Joe Armstrong
-
+> You wanted a banana but what you got was a gorilla holding the banana and the entire jungle. - Joe Armstrong <br>
 > 你想要的是香蕉，但你得到的是一只拿着香蕉的大猩猩和整个丛林。
 
 为了避免掉入这种坑，最好将基本类型（`boolean`, `string`, `number` 等）作为 props 传递。(传递基本类型也能更好的让你使用 `React.memo` 进行优化)
@@ -876,36 +869,33 @@ const ShopCategoryTile = ({
 
 避免过早/不恰当的设计。如果你实现一个简单功能需要巨大的成本，可以尝试下其他的方案。我强烈推荐你阅读 [Sandi Metz: The Wrong Abstraction（错误的抽象）](https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction).
 
-> A particular type of complexity is over-engineering, where developers have made the code more generic than it needs to be, or added functionality that isn’t presently needed by the system. Encourage developers to solve the problem they know needs to be solved now, not the problem that the developer speculates might need to be solved in the future. The future problem should be solved once it arrives and you can see its actual shape and requirements in the physical universe. - Google Engineering Practices: What to look for in a code review
-
+> A particular type of complexity is over-engineering, where developers have made the code more generic than it needs to be, or added functionality that isn’t presently needed by the system. Encourage developers to solve the problem they know needs to be solved now, not the problem that the developer speculates might need to be solved in the future. The future problem should be solved once it arrives and you can see its actual shape and requirements in the physical universe. - Google Engineering Practices: What to look for in a code review </br>
 > 过度设计是一种特殊的复杂度，开发者会让代码设计的比它需要的更加通用，或者添加目前根本不需要的能力。应该鼓励开发者解决他们目前需要处理的问题而不是将来可能遇到的问题。一旦未来出现新的问题，应该马上处理，到时候你可以站在全局的角度再来看看这个问题实际是什么样的。—— [谷歌工程实践：CR 应该做什么](https://google.github.io/eng-practices/review/reviewer/looking-for.html)
 
 参考：[KCD: AHA Programming（AHA 编程）](https://kentcdodds.com/blog/aha-programming), [C2 Wiki: Contrived Interfaces](https://wiki.c2.com/?ContrivedInterfaces)/[The Expensive Setup Smell](https://wiki.c2.com/?ExpensiveSetUpSmell)/[Premature Generalization](https://wiki.c2.com/?PrematureGeneralization)
 
 ## 🧘 3. 性能优化技巧
 
-> Premature optimization is the root of all evil - Tony Hoare
-
+> Premature optimization is the root of all evil - Tony Hoare <br/>
 > 过早的优化是万恶之源
 
-> One accurate measurement is worth a thousand expert opinions - Grace Hopper
-
+> One accurate measurement is worth a thousand expert opinions - Grace Hopper <br/>
 > 一次准确的测试胜过一千个专家的意见
 
-**太长(若)不看(请看这里)**
+**太长不看版**
 
-1. **如果你觉得慢，做一次基准测试（benchmark）来证明它。** _"面对模凌两可的情况，拒绝猜测。"_ 要善于使用[React 开发者工具](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) (Chrome 差插件) 的 profiler！
-2. `useMemo` 主要用在大开销的计算上
-3. 如果你打算使用 `React.memo`, `useMemo`, 和 `useCallback` 来减少重新渲染，它们不该有很多的依赖项，且这些依赖项尽量都保证是基本类型。
-4. 确保你清楚代码里 `React.memo`, `useCallback` 或 `useMemo` 它们都是为了什么而使用的 (是否真的能防止重新渲染？是否能证明在这些场景中真的可以显著提高性能? [Memoization 有时会起到反作用](https://kentcdodds.com/blog/usememo-and-usecallback), 所以需要关注!)
-5. [优先修复慢渲染，再修复重新渲染](https://kentcdodds.com/blog/fix-the-slow-render-before-you-fix-the-re-render))
+1. **如果你觉得应用速度慢，就应该做一次基准测试（benchmark）来证明。** _"面对模凌两可的情况，拒绝猜测。"_ 多使用[Chrome 插件 - React 开发者工具](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)的 profiler！
+2. `useMemo` 主要用在大开销的计算上。
+3. 如果你打算使用 `React.memo`, `useMemo`, 和 `useCallback` 来减少重新渲染，它们不该有过多的依赖项，且这些依赖项最好都是基本类型。
+4. 确保你清楚代码里 `React.memo`, `useCallback` 或 `useMemo` 它们都是为了什么而使用的（是否真的能防止重新渲染？是否能证明在这些场景中真的可以显著提高性能? [Memoization 有时会起到反作用](https://kentcdodds.com/blog/usememo-and-usecallback)，所以需要关注！）
+5. [优先修复慢渲染，再修复重新渲染](https://kentcdodds.com/blog/fix-the-slow-render-before-you-fix-the-re-render)
 6. 把状态尽可能地放在它被使用的地方，一方面让代码读起来更顺，另一方面，能让你的 app 更快(state colocation（状态托管）)
-7. `Context` 应该按逻辑分开，不要在一个 provider 中管理多个值。如果其中某个值变化了，所有使用该 context 的组件即便没有用到这个值，都会重新渲染。
-8. 可以通过拆分 `state` 和 `dispatch` 来优化 `context`
-9. 了解 [`lazy loading（懒加载）`](https://nextjs.org/docs/advanced-features/dynamic-import) 和 [`bundle/code splitting（代码分割）`](https://reactjs.org/docs/code-splitting.html)
-10. 大型列表 (使用 [`tannerlinsley/react-virtual`](https://github.com/tannerlinsley/react-virtual) 或其它类似的库)
+7. `Context` 应该按逻辑分开，不要在一个 provider 中管理多个 value。如果其中某个值变化了，所有使用该 context 的组件（即便没有用到这个值），都会重新渲染。
+8. 可以通过拆分 `state` 和 `dispatch` 来优化 `context`。
+9. 了解下 [`lazy loading（懒加载）`](https://nextjs.org/docs/advanced-features/dynamic-import)和[`bundle/code splitting（代码分割）`](https://reactjs.org/docs/code-splitting.html)
+10. 长列表请使用 [`tannerlinsley/react-virtual`](https://github.com/tannerlinsley/react-virtual) 或其它类似的库。
 11. 包体积越小，app 越快。你可以使用[`source-map-explorer`](https://create-react-app.dev/docs/analyzing-the-bundle-size/) 或者 [`@next/bundle-analyzer`](https://www.npmjs.com/package/@next/bundle-analyzer) (用于 NextJS) 来进行包体积分析。
-12. 如果你在寻找用于表单的库，推荐使用 [`react-hook-forms`](https://react-hook-form.com/)，它在性能和开发体验各方面都做的比较好。
+12. 关于表单的库，推荐使用 [`react-hook-forms`](https://react-hook-form.com/)，它在性能和开发体验各方面都做的比较好。
 
 <details>
     <summary><strong>查看 KCD 有关性能的文章</strong></summary>
@@ -923,18 +913,17 @@ const ShopCategoryTile = ({
 
 ## 🧘 4. 测试原则
 
-> Write tests. Not too many. Mostly integration. - Guillermo Rauch
-
+> Write tests. Not too many. Mostly integration. - Guillermo Rauch <br>
 > 我们需要测试，但不用太多（不需要追求 100% 覆盖率），精力应该侧重于集成测试（因为在速度、消耗和可靠性之间取得了一定的平衡）
 
-**太长(若)不看(请看这里)**
+**太长不看版**
 
-1. 测试应该始终与软件的使用方式相似
-2. 确保不是在测试一些边界细节（用户不会使用，看不到甚至感知不到的内容）
-3. 如果你的测试不能让你对自己的代码产生信任，那测试就是无意义的
-4. 如果你正在重构某个代码，且最后实现的功能都是完全一致的，其实几乎不需要修改测试，而且可以通过测试结果来判定你正确的重构了
+1. 测试应该始终与软件的使用方式相似。
+2. 确保不是在测试一些边界细节（用户不会使用，看不到甚至感知不到的内容）。
+3. 如果你的测试不能让你对自己的代码产生信任，那测试就是无意义的。
+4. 如果你正在重构某个代码，且最后实现的功能都是完全一致的，其实几乎不需要修改测试，而且可以通过测试结果来判定你正确的重构了。
 5. 对于前端来说，不需要 100% 的测试覆盖率，70% 就足够了。测试应该提升你的开发效率，虽然维护测试会暂时地阻塞你目前的开发，但当你不断地增加测试，会在不同阶段得到不同的回报。
-6. 我个人喜欢使用 [Jest](https://jestjs.io/), [React testing library](https://testing-library.com/docs/react-testing-library/intro/), [Cypress](https://www.cypress.io/), 和 [Mock service worker](https://github.com/mswjs/msw)
+6. 我个人喜欢使用 [Jest](https://jestjs.io/), [React testing library](https://testing-library.com/docs/react-testing-library/intro/), [Cypress](https://www.cypress.io/), 和 [Mock service worker](https://github.com/mswjs/msw)。
 
 <details>
     <summary><strong>查看 KCD 有关测试的文章</strong></summary>
