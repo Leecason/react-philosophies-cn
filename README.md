@@ -29,7 +29,7 @@
 ### 1.1 计算机比你更「智能」
 
 1. 使用 [`ESLint`](https://eslint.org/) 来静态分析你的代码，开启 [`rule-of-hooks`](https://www.npmjs.com/package/eslint-plugin-react-hooks) 和 `exhaustive-deps` 这两个规则来捕获 `React` 错误。
-2. 开启 JS [严格模式](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode) 吧，都 2202 年了。
+2. 开启 JS [严格模式](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode) 吧，都 2022 年了。
 3. [直面依赖](https://overreacted.io/a-complete-guide-to-useeffect/#two-ways-to-be-honest-about-dependencies)，解决在`useMemo`，`useCallback` 和 `useEffect` 上 `exhaustive-deps` 规则提示的 warning 或 error 问题。 可以[将最新的值挂在 ref 上](https://epicreact.dev/the-latest-ref-pattern-in-react)来保证这些 hook 在回调中拿到的都是最新的值，同时避免不必要的重新渲染。
 4. 使用 map 批量渲染组件时，[都加上 key](https://epicreact.dev/why-react-needs-a-key-prop)。
 5. [只在最顶层使用 hook](https://reactjs.org/docs/hooks-rules.html)，不要在循环、条件或嵌套语句中使用 hook。
